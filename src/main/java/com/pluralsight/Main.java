@@ -108,9 +108,6 @@ public class Main {
     private static void displayAllProducts(BasicDataSource dataSource) {
         String query = "SELECT ProductID, ProductName, UnitPrice, UnitsInStock FROM products";
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
             try (Connection connection = dataSource.getConnection();
                  PreparedStatement statement = connection.prepareStatement(query);
                  ResultSet results = statement.executeQuery()) {
@@ -128,7 +125,7 @@ public class Main {
                     System.out.println("-----------------------------------------");
                 }
             }
-        } catch (ClassNotFoundException | SQLException e) {
+         catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -136,9 +133,6 @@ public class Main {
 
     private static void displayAllCustomers(BasicDataSource dataSource) {
         String query = "SELECT ContactName, CompanyName, City, Country, Phone FROM Customers ORDER BY Country";
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Use try-with-resources for automatic resource management
             try (Connection connection = dataSource.getConnection();
@@ -160,7 +154,7 @@ public class Main {
                     System.out.println("-----------------------------------------");
                 }
             }
-        } catch (ClassNotFoundException | SQLException e) {
+         catch (SQLException e) {
             e.printStackTrace();
         }
     }
